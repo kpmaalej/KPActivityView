@@ -135,9 +135,7 @@ static DejalActivityView *dejalActivityView = nil;
 	if (!(self = [super initWithFrame:CGRectZero]))
 		return nil;
 	
-    // Allow subclasses to change the view to which to add the activity view (e.g. to cover the keyboard):
     self.originalView = addToView;
-    addToView = [self viewForView:addToView];
     
     // Configure this view (the background) and its subviews:
     [self setupBackground];
@@ -146,6 +144,13 @@ static DejalActivityView *dejalActivityView = nil;
     self.activityIndicator = [self newActivityIndicator];
     self.activityLabel = [self newActivityLabelWithText:labelText];
     
+	return self;
+}
+
+- (void)show {
+    // Allow subclasses to change the view to which to add the activity view (e.g. to cover the keyboard):
+    UIView *addToView = [self viewForView:self.originalView];
+
     // Assemble the subviews:
 	[addToView addSubview:self];
     [self addSubview:self.borderView];
@@ -153,9 +158,7 @@ static DejalActivityView *dejalActivityView = nil;
     [self.borderView addSubview:self.activityLabel];
     
 	// Animate the view in, if appropriate:
-	[self animateShow];
-    
-	return self;
+	[self animateShow];    
 }
 
 - (void)dealloc;

@@ -65,6 +65,8 @@
 // Immediately removes and releases the view without any animation:
 + (void)removeView;
 
+- (void)show; 
+
 @end
 
 
