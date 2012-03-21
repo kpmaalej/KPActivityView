@@ -1,9 +1,12 @@
 //
-//  DejalActivityView.h
-//  Dejal Open Source
+//  KPActivityView.m
+//  KPUIKit
 //
 //  Created by David Sinclair on 2009-07-26.
-//  Copyright (c) 2009-2012 Dejal Systems, LLC. All rights reserved.
+//  Copyright (c) 2009-2012 Dejal Systems, LLC. All rights reserved. 
+//
+//  Modified by Karim-Pierre Maalej on 2012-03-21.
+//  Copyright (c) 2012 Kypselia. All rights reserved. 
 //
 //  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
@@ -30,7 +33,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface DejalActivityView : UIView
+@interface KPActivityView : UIView
 
 // The view to contain the activity indicator and label.  The bezel style has a semi-transparent rounded rectangle, others are fully transparent:
 @property (nonatomic, strong, readonly) UIView *borderView;
@@ -48,19 +51,19 @@
 @property (nonatomic) BOOL showNetworkActivityIndicator;
 
 //  Returns the currently displayed activity view, or nil if there isn't one:
-+ (DejalActivityView *)currentActivityView;
++ (KPActivityView *)currentActivityView;
 
 // Creates and adds an activity view centered within the specified view, using the label "Loading...".  Returns the activity view, already added as a subview of the specified view:
-+ (DejalActivityView *)activityViewForView:(UIView *)addToView;
++ (KPActivityView *)activityViewForView:(UIView *)addToView;
 
 // Creates and adds an activity view centered within the specified view, using the specified label.  Returns the activity view, already added as a subview of the specified view:
-+ (DejalActivityView *)activityViewForView:(UIView *)addToView withLabel:(NSString *)labelText;
++ (KPActivityView *)activityViewForView:(UIView *)addToView withLabel:(NSString *)labelText;
 
 // Creates and adds an activity view centered within the specified view, using the specified label and a fixed label width.  The fixed width is useful if you want to change the label text while the view is visible.  Returns the activity view, already added as a subview of the specified view:
-+ (DejalActivityView *)activityViewForView:(UIView *)addToView withLabel:(NSString *)labelText width:(NSUInteger)aLabelWidth;
++ (KPActivityView *)activityViewForView:(UIView *)addToView withLabel:(NSString *)labelText width:(NSUInteger)aLabelWidth;
 
 // Designated initializer.  Configures the activity view using the specified label text and width, and adds as a subview of the specified view:
-- (DejalActivityView *)initForView:(UIView *)addToView withLabel:(NSString *)labelText width:(NSUInteger)aLabelWidth;
+- (KPActivityView *)initForView:(UIView *)addToView withLabel:(NSString *)labelText width:(NSUInteger)aLabelWidth;
 
 // Immediately removes and releases the view without any animation:
 + (void)removeView;
@@ -77,7 +80,7 @@
 
 // These methods are exposed for subclasses to override to customize the appearance and behavior; see the implementation for details:
 
-@interface DejalActivityView ()
+@interface KPActivityView ()
 
 - (UIView *)viewForView:(UIView *)view;
 - (CGRect)enclosingFrame;
@@ -96,7 +99,7 @@
 // ----------------------------------------------------------------------------------------
 
 
-@interface DejalWhiteActivityView : DejalActivityView
+@interface KPWhiteActivityView : KPActivityView
 
 @end
 
@@ -106,7 +109,7 @@
 // ----------------------------------------------------------------------------------------
 
 
-@interface DejalBezelActivityView : DejalActivityView
+@interface KPBezelActivityView : KPActivityView
 
 // Animates the view out from the superview and releases it, or simply removes and releases it immediately if not animating:
 + (void)removeViewAnimated:(BOOL)animated;
@@ -119,13 +122,13 @@
 // ----------------------------------------------------------------------------------------
 
 
-@interface DejalKeyboardActivityView : DejalBezelActivityView
+@interface KPKeyboardActivityView : KPBezelActivityView
 
 // Creates and adds a keyboard-style activity view, using the label "Loading...".  Returns the activity view, already covering the keyboard, or nil if the keyboard isn't currently displayed:
-+ (DejalKeyboardActivityView *)activityView;
++ (KPKeyboardActivityView *)activityView;
 
 // Creates and adds a keyboard-style activity view, using the specified label.  Returns the activity view, already covering the keyboard, or nil if the keyboard isn't currently displayed:
-+ (DejalKeyboardActivityView *)activityViewWithLabel:(NSString *)labelText;
++ (KPKeyboardActivityView *)activityViewWithLabel:(NSString *)labelText;
 
 @end
 

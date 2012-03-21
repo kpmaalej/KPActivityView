@@ -1,9 +1,12 @@
 //
-//  DejalActivityView.m
-//  Dejal Open Source
+//  KPActivityView.m
+//  KPUIKit
 //
 //  Created by David Sinclair on 2009-07-26.
-//  Copyright (c) 2009-2012 Dejal Systems, LLC. All rights reserved.
+//  Copyright (c) 2009-2012 Dejal Systems, LLC. All rights reserved. 
+//
+//  Modified by Karim-Pierre Maalej on 2012-03-21.
+//  Copyright (c) 2012 Kypselia. All rights reserved. 
 //
 //  Redistribution and use in source and binary forms, with or without modification,
 //  are permitted provided that the following conditions are met:
@@ -31,11 +34,11 @@
 //
 
 
-#import "DejalActivityView.h"
+#import "KPActivityView.h"
 #import <QuartzCore/QuartzCore.h>
 
 
-@interface DejalActivityView ()
+@interface KPActivityView ()
 
 @property (nonatomic, strong) UIView *originalView;
 @property (nonatomic, strong) UIView *borderView;
@@ -50,11 +53,11 @@
 // ----------------------------------------------------------------------------------------
 
 
-@implementation DejalActivityView
+@implementation KPActivityView
 
 @synthesize originalView, borderView, activityIndicator, activityLabel, labelWidth, showNetworkActivityIndicator;
 
-static DejalActivityView *dejalActivityView = nil;
+static KPActivityView *activityView = nil;
 
 /*
  currentActivityView
@@ -64,9 +67,9 @@ static DejalActivityView *dejalActivityView = nil;
  Written by DJS 2009-07.
 */
 
-+ (DejalActivityView *)currentActivityView;
++ (KPActivityView *)currentActivityView;
 {
-    return dejalActivityView;
+    return activityView;
 }
 
 /*
@@ -79,9 +82,9 @@ static DejalActivityView *dejalActivityView = nil;
  Changed by DJS 2011-08 to remove the "new" prefix again.
 */
 
-+ (DejalActivityView *)activityViewForView:(UIView *)addToView;
++ (KPActivityView *)activityViewForView:(UIView *)addToView;
 {
-    return [self activityViewForView:addToView withLabel:NSLocalizedString(@"Loading...", @"Default DejalActivtyView label text") width:0];
+    return [self activityViewForView:addToView withLabel:NSLocalizedString(@"Loading...", @"Default KPActivtyView label text") width:0];
 }
 
 /*
@@ -94,7 +97,7 @@ static DejalActivityView *dejalActivityView = nil;
  Changed by DJS 2011-08 to remove the "new" prefix again.
 */
 
-+ (DejalActivityView *)activityViewForView:(UIView *)addToView withLabel:(NSString *)labelText;
++ (KPActivityView *)activityViewForView:(UIView *)addToView withLabel:(NSString *)labelText;
 {
     return [self activityViewForView:addToView withLabel:labelText width:0];
 }
@@ -109,28 +112,29 @@ static DejalActivityView *dejalActivityView = nil;
  Changed by DJS 2011-08 to remove the "new" prefix again, and move the singleton stuff to here.
 */
 
-+ (DejalActivityView *)activityViewForView:(UIView *)addToView withLabel:(NSString *)labelText width:(NSUInteger)aLabelWidth;
++ (KPActivityView *)activityViewForView:(UIView *)addToView withLabel:(NSString *)labelText width:(NSUInteger)aLabelWidth;
 {
     // Immediately remove any existing activity view:
-    if (dejalActivityView)
+    if (activityView)
         [self removeView];
     
     // Remember the new view (so this is a singleton):
-    dejalActivityView = [[self alloc] initForView:addToView withLabel:labelText width:aLabelWidth];
+    activityView = [[self alloc] initForView:addToView withLabel:labelText width:aLabelWidth];
     
-    return dejalActivityView;
+    return activityView;
 }
 
 /*
  initForView:withLabel:width:
  
- Designated initializer.  Configures the activity view using the specified label text and width, and adds as a subview of the specified view.
+ Designated initializer.  Configures the activity view using the specified label text and width.
  
  Written by DJS 2009-07.
  Changed by DJS 2011-08 to move the singleton stuff to the calling class method, where it should be.
+ Changed by KPM 2012-03 to separate the initialisation and the presentation. 
 */
 
-- (DejalActivityView *)initForView:(UIView *)addToView withLabel:(NSString *)labelText width:(NSUInteger)aLabelWidth;
+- (KPActivityView *)initForView:(UIView *)addToView withLabel:(NSString *)labelText width:(NSUInteger)aLabelWidth;
 {
 	if (!(self = [super initWithFrame:CGRectZero]))
 		return nil;
@@ -146,6 +150,11 @@ static DejalActivityView *dejalActivityView = nil;
     
 	return self;
 }
+
+/*
+ show
+ Adds the activity view as a subview of the presenting view 
+*/
 
 - (void)show {
     // Allow subclasses to change the view to which to add the activity view (e.g. to cover the keyboard):
@@ -163,8 +172,8 @@ static DejalActivityView *dejalActivityView = nil;
 
 - (void)dealloc;
 {
-    if ([dejalActivityView isEqual:self])
-        dejalActivityView = nil;
+    if ([activityView isEqual:self])
+        activityView = nil;
 }
 
 /*
@@ -178,16 +187,16 @@ static DejalActivityView *dejalActivityView = nil;
 
 + (void)removeView;
 {
-    if (!dejalActivityView)
+    if (!activityView)
         return;
     
-    if (dejalActivityView.showNetworkActivityIndicator)
+    if (activityView.showNetworkActivityIndicator)
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
-    [dejalActivityView removeFromSuperview];
+    [activityView removeFromSuperview];
     
     // Remove the global reference:
-    dejalActivityView = nil;
+    activityView = nil;
 }
 
 /*
@@ -385,7 +394,7 @@ static DejalActivityView *dejalActivityView = nil;
 // ----------------------------------------------------------------------------------------
 
 
-@implementation DejalWhiteActivityView
+@implementation KPWhiteActivityView
 
 /*
  makeActivityIndicator
@@ -432,7 +441,7 @@ static DejalActivityView *dejalActivityView = nil;
 // ----------------------------------------------------------------------------------------
 
 
-@implementation DejalBezelActivityView
+@implementation KPBezelActivityView
 
 /*
  viewForView:
@@ -666,11 +675,11 @@ static DejalActivityView *dejalActivityView = nil;
 
 + (void)removeViewAnimated:(BOOL)animated;
 {
-    if (!dejalActivityView)
+    if (!activityView)
         return;
     
     if (animated)
-        [dejalActivityView animateRemove];
+        [activityView animateRemove];
     else
         [[self class] removeView];
 }
@@ -683,7 +692,7 @@ static DejalActivityView *dejalActivityView = nil;
 // ----------------------------------------------------------------------------------------
 
 
-@implementation DejalKeyboardActivityView
+@implementation KPKeyboardActivityView
 
 /*
  activityView
@@ -695,9 +704,9 @@ static DejalActivityView *dejalActivityView = nil;
  Changed by DJS 2011-08 to remove the "new" prefix again.
 */
 
-+ (DejalKeyboardActivityView *)activityView;
++ (KPKeyboardActivityView *)activityView;
 {
-    return [self activityViewWithLabel:NSLocalizedString(@"Loading...", @"Default DejalActivtyView label text")];
+    return [self activityViewWithLabel:NSLocalizedString(@"Loading...", @"Default KPActivtyView label text")];
 }
 
 /*
@@ -710,14 +719,14 @@ static DejalActivityView *dejalActivityView = nil;
  Changed by DJS 2011-08 to remove the "new" prefix again.
 */
 
-+ (DejalKeyboardActivityView *)activityViewWithLabel:(NSString *)labelText;
++ (KPKeyboardActivityView *)activityViewWithLabel:(NSString *)labelText;
 {
     UIView *keyboardView = [[UIApplication sharedApplication] keyboardView];
     
     if (!keyboardView)
         return nil;
     else
-        return (DejalKeyboardActivityView *)[self activityViewForView:keyboardView withLabel:labelText];
+        return (KPKeyboardActivityView *)[self activityViewForView:keyboardView withLabel:labelText];
 }
 
 /*

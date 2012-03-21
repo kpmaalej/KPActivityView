@@ -1,3 +1,11 @@
+Copyright (c) 2012 Kypslia. All rights reserved. 
+Copyright (c) 2002-2012 Dejal Systems, LLC. All rights reserved. 
+
+Forked from DejalActivityView on 2012-03-21. 
+Copyright information for original project follows. 
+
+-----
+
 Please see the "Dejal Open Source License" web page for more information.
 
 Attribution is required, but a non-attribution license is also available.
