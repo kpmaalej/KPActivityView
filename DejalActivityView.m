@@ -142,9 +142,9 @@ static DejalActivityView *dejalActivityView = nil;
     // Configure this view (the background) and its subviews:
     [self setupBackground];
     self.labelWidth = aLabelWidth;
-    self.borderView = [self makeBorderView];
-    self.activityIndicator = [self makeActivityIndicator];
-    self.activityLabel = [self makeActivityLabelWithText:labelText];
+    self.borderView = [self newBorderView];
+    self.activityIndicator = [self newActivityIndicator];
+    self.activityLabel = [self newActivityLabelWithText:labelText];
     
     // Assemble the subviews:
 	[addToView addSubview:self];
@@ -236,7 +236,7 @@ static DejalActivityView *dejalActivityView = nil;
  Changed by DJS 2011-11 to simplify and make it easier to override.
 */
 
-- (UIView *)makeBorderView;
+- (UIView *)newBorderView;
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
     
@@ -255,7 +255,7 @@ static DejalActivityView *dejalActivityView = nil;
  Changed by DJS 2011-11 to simplify and make it easier to override.
 */
 
-- (UIActivityIndicatorView *)makeActivityIndicator;
+- (UIActivityIndicatorView *)newActivityIndicator;
 {
     UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     
@@ -273,7 +273,7 @@ static DejalActivityView *dejalActivityView = nil;
  Changed by DJS 2011-11 to simplify and make it easier to override.
 */
 
-- (UILabel *)makeActivityLabelWithText:(NSString *)labelText;
+- (UILabel *)newActivityLabelWithText:(NSString *)labelText;
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     
@@ -393,7 +393,7 @@ static DejalActivityView *dejalActivityView = nil;
  Changed by DJS 2011-11 to simplify and make it easier to override.
 */
 
-- (UIActivityIndicatorView *)makeActivityIndicator;
+- (UIActivityIndicatorView *)newActivityIndicator;
 {
     UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     
@@ -411,9 +411,9 @@ static DejalActivityView *dejalActivityView = nil;
  Changed by DJS 2011-11 to simplify and make it easier to override.
 */
 
-- (UILabel *)makeActivityLabelWithText:(NSString *)labelText;
+- (UILabel *)newActivityLabelWithText:(NSString *)labelText;
 {
-    UILabel *label = [super makeActivityLabelWithText:labelText];
+    UILabel *label = [super newActivityLabelWithText:labelText];
     
     label.textColor = [UIColor whiteColor];
     label.shadowColor = [UIColor blackColor];
@@ -491,9 +491,9 @@ static DejalActivityView *dejalActivityView = nil;
  Changed by DJS 2011-11 to simplify and make it easier to override.
 */
 
-- (UIView *)makeBorderView;
+- (UIView *)newBorderView;
 {
-    UIView *view = [super makeBorderView];
+    UIView *view = [super newBorderView];
     
     view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     view.layer.cornerRadius = 10.0;
@@ -510,7 +510,7 @@ static DejalActivityView *dejalActivityView = nil;
  Changed by DJS 2011-11 to simplify and make it easier to override.
 */
 
-- (UIActivityIndicatorView *)makeActivityIndicator;
+- (UIActivityIndicatorView *)newActivityIndicator;
 {
     UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     
@@ -529,7 +529,7 @@ static DejalActivityView *dejalActivityView = nil;
  Changed by DJS 2011-11 to simplify and make it easier to override.
 */
 
-- (UILabel *)makeActivityLabelWithText:(NSString *)labelText;
+- (UILabel *)newActivityLabelWithText:(NSString *)labelText;
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     
@@ -794,9 +794,9 @@ static DejalActivityView *dejalActivityView = nil;
  Changed by DJS 2011-11 to simplify and make it easier to override.
 */
 
-- (UIView *)makeBorderView;
+- (UIView *)newBorderView;
 {
-    UIView *view = [super makeBorderView];
+    UIView *view = [super newBorderView];
     
     view.backgroundColor = nil;
     

@@ -80,9 +80,9 @@
 - (UIView *)viewForView:(UIView *)view;
 - (CGRect)enclosingFrame;
 - (void)setupBackground;
-- (UIView *)makeBorderView;
-- (UIActivityIndicatorView *)makeActivityIndicator;
-- (UILabel *)makeActivityLabelWithText:(NSString *)labelText;
+- (UIView *)newBorderView;
+- (UIActivityIndicatorView *)newActivityIndicator;
+- (UILabel *)newActivityLabelWithText:(NSString *)labelText;
 - (void)animateShow;
 - (void)animateRemove;
 
