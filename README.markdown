@@ -31,39 +31,39 @@ Features
 Usage
 -----
 
-Include the DejalActivityView.h and DejalActivityView.m files in your project.
+Include the KPActivityView.h and KPActivityView.m files in your project.
 
-To display the basic `DejalActivityView`, simply use:
+To display the basic `KPActivityView`, simply use:
 
-	[DejalActivityView showActivityViewForView:self.view];
+	[KPActivityView showActivityViewForView:self.view];
 
 The activity view is automatically added as a subview of the specified view (e.g. the current content view). No need to save the result to an ivar.
 
 You can instead specify a custom label via:
 
-	[DejalActivityView showActivityViewForView:self.view withLabel:@"Processing..."];
+	[KPActivityView showActivityViewForView:self.view withLabel:@"Processing..."];
 
 Or specify a custom width, e.g. so you can change the label while it is being displayed without upsetting the geometry, via:
 
-	[DejalActivityView showActivityViewForView:self.view withLabel:@"Connecting..." width:100];
+	[KPActivityView showActivityViewForView:self.view withLabel:@"Connecting..." width:100];
 
 You can also have it manage the network activity indicator in the status bar, e.g.:
 
-	[DejalActivityView activityViewForView:self.view].showNetworkActivityIndicator = YES;
+	[KPActivityView activityViewForView:self.view].showNetworkActivityIndicator = YES;
 
 Then when you're done with it, simply invoke this to get rid of it:
 
-	[DejalActivityView removeView];
+	[KPActivityView removeView];
 
-The other variations are similar.  So for example you can display `DejalBezelActivityView` via:
+The other variations are similar.  So for example you can display `KPBezelActivityView` via:
 
-	[DejalBezelActivityView showActivityViewForView:self.view];
+	[KPBezelActivityView showActivityViewForView:self.view];
 
-The `[DejalBezelActivityView showActivityViewForView:withLabel:]` and `[DejalBezelActivityView showActivityViewForView:withLabel:width:]` variations are also available.
+The `[KPBezelActivityView showActivityViewForView:withLabel:]` and `[KPBezelActivityView showActivityViewForView:withLabel:width:]` variations are also available.
 
 To remove with animation, call:
 
-	[DejalBezelActivityView removeViewAnimated:YES];
+	[KPBezelActivityView removeViewAnimated:YES];
 
 
 License and Warranty
